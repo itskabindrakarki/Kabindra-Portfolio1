@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ project.title }} | Kabindra Karki{% endblock %}
+{% block content %}
+<section class="project-hero section">
+    <div class="container project-detail-grid">
+        <div class="reveal">
+            <a class="back-link" href="{% url 'home' %}#projects">← Back to projects</a>
+            <p class="section-kicker">Project case study</p>
+            <h1>{{ project.title }}</h1>
+            <p class="project-detail-lead">{{ project.short_description }}</p>
+            <div class="tech-list large">
+                {% for technology in project.technology_list %}<span>{{ technology }}</span>{% endfor %}
+            </div>
+            <div class="hero-actions">
+                {% if project.github_url %}<a class="btn btn-primary" href="{{ project.github_url }}" target="_blank" rel="noopener">View GitHub</a>{% endif %}
+                {% if project.live_url %}<a class="btn btn-ghost" href="{{ project.live_url }}" target="_blank" rel="noopener">Live project</a>{% endif %}
+            </div>
+        </div>
+        <aside class="project-summary-card reveal">
+            <p>Status</p><strong>{{ project.get_status_display }}</strong>
+            <p>Role</p><strong>Developer</strong>
+            <p>Focus</p><strong>Full-stack development</strong>
+        </aside>
+    </div>
+</section>
+<section class="section section-alt">
+    <div class="container prose reveal">
+        <p class="section-kicker">Overview</p>
+        <h2>What I built</h2>
+        <p>{{ project.description }}</p>
+        <h3>What this project demonstrates</h3>
+        <ul>
+            <li>Translating a project idea into structured frontend and backend functionality.</li>
+            <li>Working with reusable web components and organized application logic.</li>
+            <li>Applying debugging, problem solving, responsive design, and iterative development.</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

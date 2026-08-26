@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kabindra Karki - Full-Stack Developer and BSc IT student specializing in Python, Django, HTML, CSS, JavaScript, databases, and REST APIs.">
+    <meta name="keywords" content="Kabindra Karki, Full Stack Developer, Python Developer, Django Developer, Nepal, Kathmandu, BSc IT">
+    <meta name="author" content="Kabindra Karki">
+    <title>{% block title %}Kabindra Karki | Full-Stack Developer{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="page-noise" aria-hidden="true"></div>
+    <header class="site-header" id="site-header">
+        <nav class="nav container" aria-label="Main navigation">
+            <a class="brand" href="{% url 'home' %}#home" aria-label="Kabindra Karki home">
+                <span class="brand-mark">KK</span>
+                <span class="brand-name">Kabindra.</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="{% url 'home' %}#about">About</a>
+                <a href="{% url 'home' %}#skills">Skills</a>
+                <a href="{% url 'home' %}#projects">Projects</a>
+                <a href="{% url 'home' %}#education">Education</a>
+                <a href="{% url 'home' %}#contact">Contact</a>
+                <a class="nav-resume" href="{% static 'resume/Kabindra_Karki_Internship_CV.docx' %}" download>Resume</a>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme">
+                    <span class="theme-icon">◐</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>Designed &amp; developed by <strong>Kabindra Karki</strong>.</p>
+            <p>Python · Django · HTML · CSS · JavaScript</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

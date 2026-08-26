@@ -1,0 +1,159 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<section class="hero section" id="home">
+    <div class="container hero-grid">
+        <div class="hero-copy reveal">
+            <p class="eyebrow"><span class="status-dot"></span> Open to software development internships</p>
+            <h1>Building thoughtful web experiences with <span>Python &amp; Django.</span></h1>
+            <p class="hero-lead">I’m <strong>Kabindra Karki</strong>, a BSc IT student and full-stack developer in Kathmandu. I turn ideas into clean, responsive and practical web applications across frontend and backend.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="#projects">Explore my work <span>→</span></a>
+                <a class="btn btn-ghost" href="{% static 'resume/Kabindra_Karki_Internship_CV.docx' %}" download>Download CV</a>
+            </div>
+            <div class="hero-meta">
+                <div><strong>04</strong><span>Portfolio projects</span></div>
+                <div><strong>06+</strong><span>Core technologies</span></div>
+                <div><strong>KTM</strong><span>Kathmandu, Nepal</span></div>
+            </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Developer code card">
+            <div class="code-card">
+                <div class="code-topbar"><span></span><span></span><span></span><p>developer.py</p></div>
+                <pre><code><span class="code-purple">class</span> <span class="code-blue">Developer</span>:
+    <span class="code-purple">def</span> <span class="code-yellow">__init__</span>(self):
+        self.name = <span class="code-green">"Kabindra Karki"</span>
+        self.role = <span class="code-green">"Full-Stack Developer"</span>
+        self.stack = [
+            <span class="code-green">"Python"</span>, <span class="code-green">"Django"</span>,
+            <span class="code-green">"HTML"</span>, <span class="code-green">"CSS"</span>,
+            <span class="code-green">"JavaScript"</span>
+        ]
+
+    <span class="code-purple">def</span> <span class="code-yellow">build</span>(self, idea):
+        <span class="code-purple">return</span> <span class="code-green">"clean + useful + scalable"</span></code></pre>
+                <div class="code-status"><span></span> learning.rest_apis = True</div>
+            </div>
+            <div class="floating-chip chip-one">Django</div>
+            <div class="floating-chip chip-two">Python</div>
+            <div class="floating-chip chip-three">REST API</div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="about">
+    <div class="container about-grid">
+        <div class="section-heading reveal">
+            <p class="section-kicker">01 / About</p>
+            <h2>Developer mindset.<br>Student curiosity.</h2>
+        </div>
+        <div class="about-copy reveal">
+            <p>I am a passionate BSc IT student with a strong foundation in full-stack development, specializing in Python, Django, HTML, CSS, and JavaScript.</p>
+            <p>I enjoy solving complex problems and building clean, responsive web applications. I’m currently expanding my skills in database management and REST API design and looking for opportunities to contribute to real-world software projects while learning from experienced developers.</p>
+            <div class="about-highlights">
+                <span>Problem solving</span><span>Responsive UI</span><span>Backend development</span><span>Continuous learning</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt" id="skills">
+    <div class="container">
+        <div class="section-heading row-heading reveal">
+            <div><p class="section-kicker">02 / Skills</p><h2>Tools I use to build.</h2></div>
+            <p>My current stack covers frontend development, Python/Django backend work, databases, version control, and API fundamentals.</p>
+        </div>
+        <div class="skills-grid">
+            {% for skill in skills %}
+            <article class="skill-card reveal" data-category="{{ skill.category }}">
+                <div class="skill-card-top"><h3>{{ skill.name }}</h3><span>{{ skill.get_category_display }}</span></div>
+                <div class="skill-track"><div class="skill-fill" data-level="{{ skill.level }}"></div></div>
+                <p>{{ skill.level }}% current confidence</p>
+            </article>
+            {% empty %}
+            <p>Run <code>python manage.py seed_portfolio</code> to load the skills.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section" id="projects">
+    <div class="container">
+        <div class="section-heading row-heading reveal">
+            <div><p class="section-kicker">03 / Projects</p><h2>Selected work.</h2></div>
+            <p>Projects that show my progression from programming fundamentals to full-stack web development.</p>
+        </div>
+        <div class="project-grid">
+            {% for project in projects %}
+            <article class="project-card reveal">
+                <div class="project-number">0{{ forloop.counter }}</div>
+                <div class="project-status status-{{ project.status }}">{{ project.get_status_display }}</div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.short_description }}</p>
+                <div class="tech-list">
+                    {% for technology in project.technology_list %}<span>{{ technology }}</span>{% endfor %}
+                </div>
+                <div class="project-links">
+                    <a href="{% url 'project_detail' project.slug %}">View case study <span>↗</span></a>
+                    {% if project.github_url %}<a href="{{ project.github_url }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+                </div>
+            </article>
+            {% empty %}
+            <p>Run <code>python manage.py seed_portfolio</code> to load the projects.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt" id="education">
+    <div class="container education-grid">
+        <div class="section-heading reveal">
+            <p class="section-kicker">04 / Education</p>
+            <h2>Learning, building,<br>improving.</h2>
+        </div>
+        <div class="timeline">
+            {% for item in education %}
+            <article class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-time">{{ item.completion }}</div>
+                <h3>{{ item.qualification }}</h3>
+                <p>{{ item.institution }}</p>
+                {% if item.gpa %}<span class="gpa">GPA {{ item.gpa }}</span>{% endif %}
+            </article>
+            {% empty %}
+            <p>Run <code>python manage.py seed_portfolio</code> to load education.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section contact-section" id="contact">
+    <div class="container contact-grid">
+        <div class="contact-copy reveal">
+            <p class="section-kicker">05 / Contact</p>
+            <h2>Have an internship or project in mind?</h2>
+            <p>I’m interested in software development internships, junior development opportunities, and projects where I can learn, contribute, and build useful products.</p>
+            <div class="direct-contact">
+                <a href="mailto:karkikabindra98@gmail.com">karkikabindra98@gmail.com</a>
+                <a href="tel:+9779765321195">+977 9765321195</a>
+                <span>Kathmandu, Nepal</span>
+            </div>
+        </div>
+        <div class="contact-card reveal">
+            {% if messages %}{% for message in messages %}<div class="alert">{{ message }}</div>{% endfor %}{% endif %}
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="form-row">
+                    <label>Name{{ form.name }}</label>
+                    <label>Email{{ form.email }}</label>
+                </div>
+                <label>Subject{{ form.subject }}</label>
+                <label>Message{{ form.message }}</label>
+                {% if form.errors %}<div class="form-errors">Please check the highlighted fields and try again.</div>{% endif %}
+                <button class="btn btn-primary submit-btn" type="submit">Send message <span>→</span></button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
